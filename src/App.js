@@ -1,4 +1,6 @@
-import Table from "./components/table";
+import Table from "./components/table3";
+import Table2 from "./components/table2";
+import {Editor} from "./components/table3";
 
 function App() {
     return (

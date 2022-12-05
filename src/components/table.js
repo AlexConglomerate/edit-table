@@ -15,7 +15,7 @@ function Table() {
 
     return (
         <div>
-            {table.map((item1,index1) => {
+            {table.map((item1, index1) => {
                 return <div>
                     {item1.map((item2, index2) => <input
                         key={[index1, index2]}
