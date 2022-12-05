@@ -11,6 +11,17 @@ export const Table = () => {
         })
     }
 
+    const sumColumn = (arr) => {
+        const weightArr = arr[0].length
+        const arr2 = []
+        for (let i = 0; i < weightArr; i++) {
+            const a = arr.filter(item => item[i] === '').length
+            arr2.push(a)
+        }
+        // console.log('a', arr2)
+        return arr2
+    }
+
     const classCell = 'border-solid border border-indigo-600 p-2 hover:border-b-gray-900 w-10'
     const initialData = [
         [12, 54, 87, 21, 12, 24],
@@ -21,10 +32,12 @@ export const Table = () => {
 
     const [table, setTable] = useState(initialData)
     const [sum, setSum] = useState(sumRow(table))
+    const [columns, setColumn] = useState(sumColumn(table));
 
     useEffect(() => {
         setSum(sumRow(table))
         console.log(sum)
+        setColumn(sumColumn(table))
     }, [table]);
 
 
@@ -40,9 +53,12 @@ export const Table = () => {
                 return (
                     <div key={rowNumber} className="flex flex-row">
                         {row.map((value, column) => {
+                            console.log('columns', columns)
+                            const color = columns[column] >= 2 ? 'bg-orange-400' : ''
+                            console.log(123, columns[column])
                             return (
                                 <input
-                                    className={classCell}
+                                    className={classCell + " " + color}
                                     value={value}
                                     key={column}
                                     onChange={(e) => handleChangeCell(rowNumber, column, e)}
@@ -50,7 +66,7 @@ export const Table = () => {
                             )
                         })}
                         {/*выводим сумму*/}
-                        <div className={classCell + ' text-amber-400'}>
+                        <div className={classCell + ' text-amber-400 '}>
                             {sum[rowNumber]}
                         </div>
                     </div>
