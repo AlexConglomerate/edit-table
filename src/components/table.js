@@ -2,6 +2,15 @@ import React, {useEffect, useState} from 'react';
 
 export const Table = () => {
 
+    const sumRow = (arr) => {
+        return arr.map(i => {
+            return i.reduce((acc, item) => {
+                acc += Number(item)
+                return acc
+            }, 0)
+        })
+    }
+
     const classCell = 'border-solid border border-indigo-600 p-2 hover:border-b-gray-900 w-10'
     const initialData = [
         [12, 54, 87, 21, 12, 24],
@@ -11,18 +20,12 @@ export const Table = () => {
     ]
 
     const [table, setTable] = useState(initialData)
-    const [sum, setSum] = useState()
+    const [sum, setSum] = useState(sumRow(table))
 
     useEffect(() => {
         setSum(sumRow(table))
         console.log(sum)
     }, [table]);
-
-    const sumRow = (arr) => {
-        return arr.map(i => {
-            return i.reduce((acc, item) => acc += Number(item), 0)
-        })
-    }
 
 
     const handleChangeCell = (row, column, e) => {
@@ -46,7 +49,8 @@ export const Table = () => {
                                 />
                             )
                         })}
-                        <div className={classCell + ''}>
+                        {/*выводим сумму*/}
+                        <div className={classCell + ' text-amber-400'}>
                             {sum[rowNumber]}
                         </div>
                     </div>
