@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/edit-table.iml" filepath="$PROJECT_DIR$/.idea/edit-table.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../spreadsheet-clone/.idea/spreadsheet-clone.iml" filepath="$PROJECT_DIR$/../spreadsheet-clone/.idea/spreadsheet-clone.iml" />
     </modules>
   </component>
 </project>

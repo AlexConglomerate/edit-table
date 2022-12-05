@@ -1,26 +1,7 @@
 import React, {useEffect, useState} from 'react';
+import {sumColumn, sumRow} from "./utils";
 
 export const Table = () => {
-
-    const sumRow = (arr) => {
-        return arr.map(i => {
-            return i.reduce((acc, item) => {
-                acc += Number(item)
-                return acc
-            }, 0)
-        })
-    }
-
-    const sumColumn = (arr) => {
-        const weightArr = arr[0].length
-        const arr2 = []
-        for (let i = 0; i < weightArr; i++) {
-            const a = arr.filter(item => item[i] === '').length
-            arr2.push(a)
-        }
-        return arr2
-    }
-
     const classCell = 'border-solid border border-indigo-600 p-2 hover:border-b-gray-900 w-10'
     const initialData = [
         [12, 54, 87, 21, 12, 24],
@@ -49,7 +30,7 @@ export const Table = () => {
         <div>
             {table.map((row, rowNumber) => {
                 return (
-                    <div key={rowNumber} className="flex flex-row">
+                    <div key={rowNumber} className="flex flex-row hover:bg-gray-300">
                         {row.map((value, column) => {
                             const color = columns[column] >= 2 ? 'bg-orange-200' : ''
                             return (
@@ -58,6 +39,9 @@ export const Table = () => {
                                     value={value}
                                     key={column}
                                     onChange={(e) => handleChangeCell(rowNumber, column, e)}
+                                    onMouseDown={() => console.log(`onMouseDown`, rowNumber, column)}
+                                    onMouseOver={() => console.log(rowNumber, column)}
+
                                 />
                             )
                         })}
