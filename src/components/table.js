@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 export const Table = () => {
 
+    const classCell = 'border-solid border border-indigo-600 p-2 hover:border-b-gray-900 w-10'
     const initialData = [
         [12, 54, 87, 21, 12, 24],
         [21, 87, 98, 51, 87, 34],
@@ -34,17 +35,20 @@ export const Table = () => {
         <div>
             {table.map((row, rowNumber) => {
                 return (
-                    <div key={rowNumber}>
+                    <div key={rowNumber} className="flex flex-row">
                         {row.map((value, column) => {
                             return (
                                 <input
-                                    className='border-solid border border-indigo-600 p-2 hover:border-b-gray-900 w-10'
+                                    className={classCell}
                                     value={value}
                                     key={column}
                                     onChange={(e) => handleChangeCell(rowNumber, column, e)}
                                 />
                             )
                         })}
+                        <div className={classCell + ''}>
+                            {sum[rowNumber]}
+                        </div>
                     </div>
                 )
             })
