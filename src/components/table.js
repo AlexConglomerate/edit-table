@@ -18,7 +18,6 @@ export const Table = () => {
             const a = arr.filter(item => item[i] === '').length
             arr2.push(a)
         }
-        // console.log('a', arr2)
         return arr2
     }
 
@@ -31,12 +30,11 @@ export const Table = () => {
     ]
 
     const [table, setTable] = useState(initialData)
-    const [sum, setSum] = useState(sumRow(table))
-    const [columns, setColumn] = useState(sumColumn(table));
+    const [sum, setSum] = useState(sumRow(initialData))
+    const [columns, setColumn] = useState(sumColumn(initialData));
 
     useEffect(() => {
         setSum(sumRow(table))
-        console.log(sum)
         setColumn(sumColumn(table))
     }, [table]);
 
@@ -53,9 +51,7 @@ export const Table = () => {
                 return (
                     <div key={rowNumber} className="flex flex-row">
                         {row.map((value, column) => {
-                            console.log('columns', columns)
-                            const color = columns[column] >= 2 ? 'bg-orange-400' : ''
-                            console.log(123, columns[column])
+                            const color = columns[column] >= 2 ? 'bg-orange-200' : ''
                             return (
                                 <input
                                     className={classCell + " " + color}
@@ -66,7 +62,7 @@ export const Table = () => {
                             )
                         })}
                         {/*выводим сумму*/}
-                        <div className={classCell + ' text-amber-400 '}>
+                        <div className={classCell + ' text-amber-500'}>
                             {sum[rowNumber]}
                         </div>
                     </div>
