@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {sumColumn, sumRow} from "./utils";
+import {includesSelect, sumColumn, sumRow} from "./utils";
 
 export const Table = () => {
     const classCell = 'border-solid border border-indigo-600 p-2 hover:border-b-gray-900 w-10'
@@ -12,7 +12,10 @@ export const Table = () => {
 
     const [table, setTable] = useState(initialData)
     const [sum, setSum] = useState(sumRow(initialData))
-    const [columns, setColumn] = useState(sumColumn(initialData));
+    const [columns, setColumn] = useState(sumColumn(initialData))
+    const [selecting, setSelecting] = useState(false);
+    const [selectArea, setSelectArea] = useState([]);
+
 
     useEffect(() => {
         setSum(sumRow(table))
@@ -26,6 +29,38 @@ export const Table = () => {
         setTable(newTable)
     }
 
+    const handleOnMouseDown = (rowNumber, column) => {
+        // console.log(`onMouseDown`, rowNumber, column)
+        setSelecting(true)
+        setSelectArea([[rowNumber, column]])
+    }
+
+
+    const handleOnMouseOver = (rowNumber, column) => {
+        if (selecting === true) {
+            const arr = [...selectArea]
+            const len = arr.length
+            const currentArr = [rowNumber, column]
+            arr.forEach((item, index) => {
+                if (currentArr[0] === item[0] && currentArr[1] === item[1]) {
+                    arr.splice(index, 1);
+                }
+            })
+
+
+            if (len === arr.length) {
+                arr.push([rowNumber, column])
+            }
+            setSelectArea(arr)
+            console.log(JSON.stringify(selectArea))
+        }
+    }
+
+    const handleOnMouseUp = (rowNumber, column) => {
+        // console.log(`onMouseUp`, rowNumber, column)
+        setSelecting(false)
+    }
+
     return (
         <div>
             {table.map((row, rowNumber) => {
@@ -33,15 +68,18 @@ export const Table = () => {
                     <div key={rowNumber} className="flex flex-row hover:bg-gray-300">
                         {row.map((value, column) => {
                             const color = columns[column] >= 2 ? 'bg-orange-200' : ''
+                            const color2 = includesSelect(selectArea,[rowNumber, column]) == true ? 'bg-blue-300' : ''
+                            console.log('color2', color2)
+                            console.log('includesSelect', includesSelect(selectArea,[rowNumber, column]))
                             return (
                                 <input
-                                    className={classCell + " " + color}
+                                    className={classCell + " " + color + " " + color2 + " cursor-cell"}
                                     value={value}
                                     key={column}
                                     onChange={(e) => handleChangeCell(rowNumber, column, e)}
-                                    onMouseDown={() => console.log(`onMouseDown`, rowNumber, column)}
-                                    onMouseOver={() => console.log(rowNumber, column)}
-
+                                    onMouseDown={() => handleOnMouseDown(rowNumber, column)}
+                                    onMouseOver={() => handleOnMouseOver(rowNumber, column)}
+                                    onMouseUp={() => handleOnMouseUp(rowNumber, column)}
                                 />
                             )
                         })}

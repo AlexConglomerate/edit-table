@@ -17,4 +17,14 @@ const sumColumn = (arr) => {
     return arr2
 }
 
-export {sumColumn, sumRow}
+const includesSelect = (arr, currentArr) => {
+    let a = false
+    arr.forEach((item) => {
+        if (currentArr[0] === item[0] && currentArr[1] === item[1]) {
+            a = true
+        }
+    })
+    return a
+}
+
+export {sumColumn, sumRow, includesSelect}
