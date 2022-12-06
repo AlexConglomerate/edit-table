@@ -68,7 +68,7 @@ export const Table = () => {
                     <div key={rowNumber} className="flex flex-row hover:bg-gray-300">
                         {row.map((value, column) => {
                             const color = columns[column] >= 2 ? 'bg-orange-200' : ''
-                            const color2 = includesSelect(selectArea,[rowNumber, column]) == true ? 'bg-blue-300' : ''
+                            const color2 = includesSelect(selectArea,[rowNumber, column]) === true ? 'bg-blue-300' : ''
                             console.log('color2', color2)
                             console.log('includesSelect', includesSelect(selectArea,[rowNumber, column]))
                             return (
