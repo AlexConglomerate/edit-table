@@ -18,3 +18,6 @@ console.log(arr)
 // console.log(aa)
 
 
+let aaa = {qwe: 123, asd: 90}
+let www = {...aaa, asd: 923440}
+console.log(www)
