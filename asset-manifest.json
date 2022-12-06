@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/edit-table/static/css/main.f1eababf.css",
+    "main.js": "/edit-table/static/js/main.c3fc40cd.js",
+    "index.html": "/edit-table/index.html",
+    "main.f1eababf.css.map": "/edit-table/static/css/main.f1eababf.css.map",
+    "main.c3fc40cd.js.map": "/edit-table/static/js/main.c3fc40cd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f1eababf.css",
+    "static/js/main.c3fc40cd.js"
+  ]
+}
